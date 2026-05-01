@@ -1,0 +1,126 @@
+[versions]
+# ── Core toolchain — exact match with MedicalSymptomPreScreener (AGP 9.1.1) ──
+agp = "9.1.1"
+kotlin = "2.2.10"
+ksp = "2.2.10-2.0.2"
+
+# ── AndroidX core — from MedicalSymptomPreScreener ────────────────────────────
+coreKtx = "1.16.0"
+lifecycleRuntimeKtx = "2.9.0"
+activityCompose = "1.10.1"
+composeBom = "2025.04.01"
+navigationCompose = "2.9.0"
+
+# ── Hilt — from both working projects ────────────────────────────────────────
+hilt = "2.59.1"
+hiltNavigationCompose = "1.2.0"
+
+# ── Room — from both working projects (2.7.1, NOT 2.6.1) ─────────────────────
+room = "2.7.1"
+
+# ── CameraX — from FakeProductDetector ───────────────────────────────────────
+cameraX = "1.3.4"
+
+# ── ML Kit Object Detection — RetailSafetyMonitor specific ───────────────────
+mlkitObjectDetection = "17.0.2"
+
+# ── WorkManager — RetailSafetyMonitor specific ───────────────────────────────
+workmanager = "2.9.0"
+
+# ── Network — from both working projects ─────────────────────────────────────
+retrofit = "2.11.0"
+okhttp = "4.12.0"
+gson = "2.10.1"
+
+# ── Coroutines — from MedicalSymptomPreScreener ──────────────────────────────
+coroutines = "1.9.0"
+
+# ── UI utilities — from MedicalSymptomPreScreener ────────────────────────────
+accompanist = "0.37.0"
+coil = "2.7.0"
+
+# ── Testing — from MedicalSymptomPreScreener ─────────────────────────────────
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+mockitoKotlin = "5.4.0"
+turbine = "1.2.0"
+archTesting = "2.2.0"
+
+[libraries]
+# ── Core ─────────────────────────────────────────────────────────────────────
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+
+# ── Compose BOM ───────────────────────────────────────────────────────────────
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended" }
+
+# ── Navigation ────────────────────────────────────────────────────────────────
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+
+# ── Hilt — artifact names match MedicalSymptomPreScreener ────────────────────
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltNavigationCompose" }
+hilt-androidx-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltNavigationCompose" }
+
+# ── Room ──────────────────────────────────────────────────────────────────────
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
+
+# ── CameraX — artifact names match FakeProductDetector ───────────────────────
+camerax-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraX" }
+camerax-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "cameraX" }
+camerax-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "cameraX" }
+camerax-view = { group = "androidx.camera", name = "camera-view", version.ref = "cameraX" }
+
+# ── ML Kit Object Detection ───────────────────────────────────────────────────
+mlkit-detection = { group = "com.google.mlkit", name = "object-detection", version.ref = "mlkitObjectDetection" }
+
+# ── WorkManager ───────────────────────────────────────────────────────────────
+workmanager-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workmanager" }
+workmanager-testing = { group = "androidx.work", name = "work-testing", version.ref = "workmanager" }
+
+# ── Network ───────────────────────────────────────────────────────────────────
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
+# ── Coroutines ────────────────────────────────────────────────────────────────
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+
+# ── UI Utilities ─────────────────────────────────────────────────────────────
+accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+arch-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "archTesting" }
+
+[plugins]
+# ── Exact plugin block from MedicalSymptomPreScreener ────────────────────────
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

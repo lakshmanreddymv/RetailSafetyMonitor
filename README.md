@@ -16,6 +16,22 @@ Turn any Android phone into a live safety monitor — zero hardware cost, deploy
 
 ---
 
+## Screenshots
+
+<p align="center">
+  <img src="Screenshot_20260504_162149.png" width="200" alt="Monitor Screen"/>
+  &nbsp;
+  <img src="Screenshot_20260504_162208.png" width="200" alt="Hazard Detected"/>
+  &nbsp;
+  <img src="Screenshot_20260504_162222.png" width="200" alt="Dashboard"/>
+  &nbsp;
+  <img src="Screenshot_20260504_162228.png" width="200" alt="Incidents"/>
+  &nbsp;
+  <img src="Screenshot_20260504_162307.png" width="200" alt="Report Screen"/>
+</p>
+
+---
+
 ## The Problem
 
 - **$50B+ annual retail safety losses** from preventable in-store incidents

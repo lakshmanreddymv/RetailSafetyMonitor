@@ -1,24 +1,5 @@
-# RetailSafetyMonitor — Claude Code Instructions
-
-## Project
-AI Retail Store Safety Monitor — Android portfolio project.
-Package: com.example.retailsafetymonitor
-Min SDK: 26, Target SDK: 36, Kotlin, Jetpack Compose
-
-## Skill routing
-
-When the user's request matches an available skill, invoke it via the Skill tool. When in doubt, invoke the skill.
-
-Key routing rules:
-- Product ideas/brainstorming → invoke /office-hours
-- Strategy/scope → invoke /plan-ceo-review
-- Architecture → invoke /plan-eng-review
-- Design system/plan review → invoke /design-consultation or /plan-design-review
-- Full review pipeline → invoke /autoplan
-- Bugs/errors → invoke /investigate
-- QA/testing site behavior → invoke /qa or /qa-only
-- Code review/diff check → invoke /review
-- Visual polish → invoke /design-review
-- Ship/deploy/PR → invoke /ship or /land-and-deploy
-- Save progress → invoke /context-save
-- Resume context → invoke /context-restore
+# RetailSafetyMonitor — AI Agent Context
+Stack: Clean Architecture + MVVM + Hilt + ML Kit + WorkManager + Gemini AI
+Tests: 55+ ✅ | WorkManager: Done | Gemini reports: Done
+DO NOT TOUCH: 55+ tests, ML Kit hazard detection, WorkManager chain
+TARGETS: 80%+ coverage, <500ms latency, WorkManager OS-kill recovery, battery optimized

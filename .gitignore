@@ -28,3 +28,6 @@ keystore.jks
 *.keystore
 local.properties
 gemini.properties
+.idea/
+.claude/
+app/.gitignore

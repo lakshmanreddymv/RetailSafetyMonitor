@@ -6,9 +6,9 @@ Turn any Android phone into a live safety monitor — zero hardware cost, deploy
 [![CI](https://github.com/lakshmanreddymv/RetailSafetyMonitor/actions/workflows/ci.yml/badge.svg)](https://github.com/lakshmanreddymv/RetailSafetyMonitor/actions/workflows/ci.yml)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-blue)](https://kotlinlang.org)
 [![Android](https://img.shields.io/badge/Android-26%2B-green)](https://developer.android.com)
-[![Gemini API](https://img.shields.io/badge/Gemini-2.5%20Flash-orange)](https://aistudio.google.com)
+[![Gemini API](https://img.shields.io/badge/Gemini-3.5%20Flash-orange)](https://aistudio.google.com)
 [![ML Kit](https://img.shields.io/badge/ML%20Kit-Object%20Detection-purple)](https://developers.google.com/ml-kit/vision/object-detection)
-[![Tests](https://img.shields.io/badge/Tests-55%2B%20passing-brightgreen)](app/src/test)
+[![Tests](https://img.shields.io/badge/Tests-130%20passing-brightgreen)](app/src/test)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
 **Project 5 of 5 in a portfolio of real-world AI Android apps.**
@@ -48,7 +48,7 @@ Turn any Android phone into a real-time AI safety monitor.
 
 A phone mounted at the end of an aisle runs ML Kit Object Detection on every camera frame.
 Hazards are detected, classified by OSHA severity, and escalated to the manager via push notification —
-all without leaving the device. The Gemini 2.5 Flash weekly report turns raw incident data into
+all without leaving the device. The Gemini 3.5 Flash weekly report turns raw incident data into
 actionable safety insights every Monday morning.
 
 **Zero hardware cost. Deploy in 5 minutes.**
@@ -61,7 +61,7 @@ actionable safety insights every Monday morning.
 - **Colour-coded bounding boxes** — red (CRITICAL), amber (HIGH), yellow (MEDIUM), green (LOW)
 - **Instant push notifications** for every newly detected hazard, severity-labelled
 - **Smart escalation engine** — WorkManager re-notifies managers every 15–120 min based on severity
-- **Weekly AI safety report** via Gemini 2.5 Flash — trends, top risks, actionable recommendations
+- **Weekly AI safety report** via Gemini 3.5 Flash — trends, top risks, actionable recommendations
 - **Compliance score dashboard** — severity-weighted 0–100 score, resets every Monday
 - **Full incident log** with hazard type, severity, timestamp, and location description audit trail
 - **Works offline** — ML Kit runs entirely on-device, no network required for detection
@@ -104,7 +104,7 @@ flowchart TD
     subgraph Report ["Weekly AI Report — every Monday"]
         O[WeeklyReportWorker triggers\nGenerateSafetyReportUseCase]
         O --> P[Compliance score calculation\nbase - criticalPenalty - highPenalty]
-        P --> Q[Gemini 2.5 Flash\ntrend analysis + recommendations]
+        P --> Q[Gemini 3.5 Flash\ntrend analysis + recommendations]
         Q --> R[SafetyReport persisted to Room\nReportScreen renders results]
     end
 
@@ -246,7 +246,7 @@ sequenceDiagram
 | Architecture | Clean Architecture + MVVM + Hilt 2.59.1 + UDF |
 | Camera | CameraX 1.3.4 (Preview + ImageAnalysis) |
 | Object Detection | ML Kit Object Detection 17.0.2 (on-device) |
-| AI Reports | Gemini 2.5 Flash via Retrofit |
+| AI Reports | Gemini 3.5 Flash via Retrofit |
 | Database | Room 2.7.1 |
 | Background Jobs | WorkManager 2.9.0 |
 | Dependency Injection | Hilt (Dagger) |
@@ -287,7 +287,7 @@ gemini.api.key=YOUR_GEMINI_API_KEY
 ```bash
 ./gradlew assembleDebug        # build debug APK
 ./gradlew installDebug         # install on connected device
-./gradlew test                 # run all 55+ unit tests
+./gradlew test                 # run all 130 unit tests
 ```
 
 > **Note:** The Gemini API key is only required for the weekly report feature.
@@ -306,7 +306,7 @@ gemini.api.key=YOUR_GEMINI_API_KEY
 | 4. Compliance score | Open Dashboard tab | Gauge shows 0–100 score, stat chips show detected/resolved counts |
 | 5. Weekly report | Dashboard → "Generate Weekly AI Report" | Gemini analyses incidents, report appears in Report tab |
 | 6. Offline mode | Enable airplane mode → open Monitor tab | ML Kit detections continue — only Gemini report is blocked |
-| 7. Unit tests | `./gradlew test` | 55+ tests pass, 0 failures |
+| 7. Unit tests | `./gradlew test` | 130 tests pass, 0 failures |
 
 ---
 
@@ -314,15 +314,21 @@ gemini.api.key=YOUR_GEMINI_API_KEY
 
 | Test Class | Tests | What It Verifies |
 |---|---|---|
-| `HazardDetectorTest` | 14 | ML Kit label → HazardType mapping, confidence threshold filtering, OVERCROWDING aggregation (≥3 persons), position heuristics |
-| `DetectHazardUseCaseTest` | 8 | HazardType → Severity mapping, all 8 types covered, CRITICAL/HIGH/MEDIUM/LOW tiers |
-| `GenerateSafetyReportUseCaseTest` | 10 | Compliance score formula, Gemini fallback on failure, zero-hazard edge case returns 100 |
-| `ComplianceScoreTest` | 8 | Severity-weighted penalty calculation, critical cap at 40, high cap at 20, floor at 0 |
-| `DashboardViewModelTest` | 7 | Weekly scope query, score recomputation, report generation state transitions |
-| `MonitorViewModelTest` | 8 | Idle → Monitoring → HazardDetected → 5s auto-dismiss, pause/resume, error recovery |
-| `HazardRepositoryImplTest` | 6 | Room insert/query, entity ↔ domain mapping, `lastEscalatedAt` persistence |
-| `HazardEscalationWorkerTest` | 4 | Idempotency guard (age threshold AND cooldown both required), `Result.retry` on DB exception |
-| **Total** | **65** | **0 failures** |
+| `HazardDetectorTest` | 17 | ML Kit label → HazardType mapping, confidence threshold filtering, OVERCROWDING aggregation (≥3 persons), position heuristics |
+| `DetectHazardUseCaseTest` | 9 | HazardType → Severity mapping, all 8 types covered, CRITICAL/HIGH/MEDIUM/LOW tiers |
+| `GenerateSafetyReportUseCaseTest` | 6 | Compliance score formula, Gemini fallback on failure, zero-hazard edge case returns 100 |
+| `ComplianceScoreTest` | 11 | Severity-weighted penalty calculation, critical cap at 40, high cap at 20, floor at 0 |
+| `DashboardViewModelTest` | 6 | Weekly scope query, score recomputation, report generation state transitions |
+| `MonitorViewModelTest` | 6 | Idle → Monitoring → HazardDetected → 5s auto-dismiss, pause/resume, error recovery |
+| `HazardRepositoryImplTest` | 8 | Room insert/query, entity ↔ domain mapping, `lastEscalatedAt` persistence |
+| `HazardEscalationWorkerTest` | 10 | Idempotency guard (age threshold AND cooldown both required), `Result.retry` on DB exception |
+| `HazardUiStateEscalationTest` | 13 | UI state machine — HazardDetected → auto-dismiss sequence, simultaneous hazard types, edge cases |
+| `WorkManagerKillRecoveryTest` | 10 | WorkManager re-queues after OS process kill, pending hazards re-escalate on restart |
+| `CameraPermissionDeniedTest` | 15 | CAMERA_DENIED state transitions, no camera start on denial, permission re-request flow |
+| `GeminiReportFailureTest` | 12 | WeeklyReportWorker failure paths — timeout, 429, malformed JSON, partial report fallback |
+| `HazardDetectionLatencyTest` | 6 | processFrame completes under 500ms SLA for standard and low-end device profiles |
+| `ExampleUnitTest` | 1 | JVM test harness sanity check |
+| **Total** | **130** | **0 failures** |
 
 ```bash
 ./gradlew test

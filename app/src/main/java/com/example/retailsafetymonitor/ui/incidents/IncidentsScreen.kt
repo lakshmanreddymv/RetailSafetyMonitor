@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -68,7 +69,8 @@ fun IncidentsScreen(viewModel: IncidentsViewModel = hiltViewModel()) {
                 FilterChip(
                     selected = uiState.filterSeverity == sev,
                     onClick = { viewModel.setSeverityFilter(if (uiState.filterSeverity == sev) null else sev) },
-                    label = { Text(sev.name, maxLines = 1) }
+                    label = { Text(sev.name, maxLines = 1) },
+                    modifier = Modifier.widthIn(min = 64.dp)
                 )
             }
         }

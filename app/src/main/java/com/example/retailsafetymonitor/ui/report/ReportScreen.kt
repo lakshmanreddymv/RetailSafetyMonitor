@@ -11,8 +11,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -56,6 +58,26 @@ fun ReportScreen(viewModel: ReportViewModel = hiltViewModel()) {
 
         when {
             uiState.isLoading -> CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+            uiState.error != null -> {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer
+                    )
+                ) {
+                    Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Text(
+                            text = uiState.error!!,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onErrorContainer
+                        )
+                        OutlinedButton(onClick = { viewModel.retryLoad() }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
             uiState.latestReport == null -> {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp)) {
                     Text(

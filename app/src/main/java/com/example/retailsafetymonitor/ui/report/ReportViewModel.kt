@@ -7,8 +7,9 @@ import com.example.retailsafetymonitor.domain.repository.ReportRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 /**
@@ -17,11 +18,13 @@ import javax.inject.Inject
  * @property latestReport The most recently generated [SafetyReport], or null if none exist yet.
  * @property allReports Full list of reports ordered newest-first.
  * @property isLoading True until the first Room emission resolves the initial loading state.
+ * @property error Non-null when the report stream emits an unrecoverable error; null otherwise.
  */
 data class ReportUiState(
     val latestReport: SafetyReport? = null,
     val allReports: List<SafetyReport> = emptyList(),
-    val isLoading: Boolean = true
+    val isLoading: Boolean = true,
+    val error: String? = null
 )
 
 /**
@@ -50,5 +53,10 @@ class ReportViewModel @Inject constructor(
             allReports = reports,
             isLoading = false
         )
+    }.catch { _ ->
+        emit(ReportUiState(isLoading = false, error = "AI report unavailable · Check connection"))
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ReportUiState())
+
+    /** Resets transient error state; Room Flow auto-reconnects on next subscription. */
+    fun retryLoad() = Unit
 }

@@ -1,9 +1,11 @@
 package com.example.retailsafetymonitor.ui.components
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -49,7 +51,10 @@ fun HazardCard(
     val dateFormat = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault())
 
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .defaultMinSize(minHeight = 80.dp)
+            .animateContentSize(),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
             containerColor = if (hazard.isResolved)

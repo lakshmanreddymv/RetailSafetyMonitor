@@ -103,7 +103,7 @@ fun SettingsScreen() {
                 Text("About", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                 Spacer(modifier = Modifier.height(8.dp))
                 Text("AI Retail Store Safety Monitor v1.0")
-                Text("ML Kit Object Detection + Gemini 2.5 Flash",
+                Text("ML Kit Object Detection + Gemini 3.5 Flash",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text("WorkManager escalation every 15 minutes",

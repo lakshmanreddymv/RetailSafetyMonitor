@@ -25,10 +25,10 @@ val TertiaryContainer    = Color(0xFFC8E6C9)
 
 val Surface              = Color(0xFFFFFFFF)
 val OnSurface            = Color(0xFF1C1B1F)
-val SurfaceVariant       = Color(0xFFF5F5F5)
+val SurfaceVariant       = Color(0xFFE3E5E8)
 val OnSurfaceVariant     = Color(0xFF49454F)
 
-val Background           = Color(0xFFFAFAFA)
+val Background           = Color(0xFFF0F2F5)
 val OnBackground         = Color(0xFF1C1B1F)
 
 val Outline              = Color(0xFF79747E)

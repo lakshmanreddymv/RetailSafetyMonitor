@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -51,12 +52,12 @@ fun ReportScreen(viewModel: ReportViewModel = hiltViewModel()) {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text("AI Safety Report", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        Text("AI Safety Report", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
 
         when {
             uiState.isLoading -> CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             uiState.latestReport == null -> {
-                Card(modifier = Modifier.fillMaxWidth()) {
+                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp)) {
                     Text(
                         "No report generated yet. Use the Dashboard to generate your first weekly report.",
                         modifier = Modifier.padding(16.dp),
@@ -68,7 +69,7 @@ fun ReportScreen(viewModel: ReportViewModel = hiltViewModel()) {
                 val report = uiState.latestReport!!
 
                 // Report metadata
-                Card(modifier = Modifier.fillMaxWidth()) {
+                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp)) {
                     Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text("Week of ${dateFormat.format(Date(report.weekStartDate))}",
                             style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
@@ -85,20 +86,20 @@ fun ReportScreen(viewModel: ReportViewModel = hiltViewModel()) {
                 )
 
                 // Stats
-                Card(modifier = Modifier.fillMaxWidth()) {
+                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp)) {
                     Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("Weekly Summary", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                        Text("Total hazards: ${report.totalHazards}")
-                        Text("Resolved: ${report.resolvedHazards}")
-                        Text("Unresolved: ${report.totalHazards - report.resolvedHazards}")
+                        Text("Total hazards: ${report.totalHazards}", style = MaterialTheme.typography.bodyMedium)
+                        Text("Resolved: ${report.resolvedHazards}", style = MaterialTheme.typography.bodyMedium)
+                        Text("Unresolved: ${report.totalHazards - report.resolvedHazards}", style = MaterialTheme.typography.bodyMedium)
                         if (report.topHazardTypes.isNotEmpty()) {
-                            Text("Top risks: ${report.topHazardTypes.joinToString { it.displayName }}")
+                            Text("Top risks: ${report.topHazardTypes.joinToString { it.displayName }}", style = MaterialTheme.typography.bodyMedium)
                         }
                     }
                 }
 
                 // AI Summary
-                Card(modifier = Modifier.fillMaxWidth()) {
+                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text("AI Analysis", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                         Spacer(modifier = Modifier.height(8.dp))

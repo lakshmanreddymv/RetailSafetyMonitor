@@ -198,7 +198,7 @@ private fun MonitoringStatusIndicator(isActive: Boolean, modifier: Modifier = Mo
     Box(
         modifier = modifier
             .background(
-                color = if (isActive) Color(0xFF43A047) else Color(0xFFBDBDBD),
+                color = if (isActive) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.surfaceVariant,
                 shape = androidx.compose.foundation.shape.CircleShape
             )
             .padding(8.dp)
@@ -229,7 +229,7 @@ private fun PermissionRationaleView(showRationale: Boolean, onRequest: () -> Uni
                 style = MaterialTheme.typography.bodyLarge
             )
             androidx.compose.foundation.layout.Spacer(modifier = Modifier.padding(8.dp))
-            androidx.compose.material3.Button(onClick = onRequest) {
+            androidx.compose.material3.OutlinedButton(onClick = onRequest) {
                 Text("Grant Camera Permission")
             }
         }
@@ -246,9 +246,9 @@ private fun PermissionRationaleView(showRationale: Boolean, onRequest: () -> Uni
 private fun ErrorView(message: String, onRetry: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(32.dp)) {
-            Text(text = "Error: $message", style = MaterialTheme.typography.bodyLarge, color = Color(0xFFE53935))
+            Text(text = "Error: $message", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.error)
             androidx.compose.foundation.layout.Spacer(modifier = Modifier.padding(8.dp))
-            androidx.compose.material3.Button(onClick = onRetry) { Text("Retry") }
+            androidx.compose.material3.OutlinedButton(onClick = onRetry) { Text("Retry") }
         }
     }
 }

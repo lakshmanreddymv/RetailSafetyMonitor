@@ -43,7 +43,7 @@ fun IncidentsScreen(viewModel: IncidentsViewModel = hiltViewModel()) {
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text(
             text = "Incident History",
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineLarge,
             fontWeight = FontWeight.Bold
         )
         Text(
@@ -62,13 +62,13 @@ fun IncidentsScreen(viewModel: IncidentsViewModel = hiltViewModel()) {
             FilterChip(
                 selected = uiState.filterSeverity == null,
                 onClick = { viewModel.setSeverityFilter(null) },
-                label = { Text("All") }
+                label = { Text("All", maxLines = 1) }
             )
             Severity.entries.forEach { sev ->
                 FilterChip(
                     selected = uiState.filterSeverity == sev,
                     onClick = { viewModel.setSeverityFilter(if (uiState.filterSeverity == sev) null else sev) },
-                    label = { Text(sev.name) }
+                    label = { Text(sev.name, maxLines = 1) }
                 )
             }
         }
@@ -78,12 +78,12 @@ fun IncidentsScreen(viewModel: IncidentsViewModel = hiltViewModel()) {
             FilterChip(
                 selected = uiState.showResolvedOnly == false,
                 onClick = { viewModel.setResolvedFilter(if (uiState.showResolvedOnly == false) null else false) },
-                label = { Text("Open") }
+                label = { Text("Open", maxLines = 1) }
             )
             FilterChip(
                 selected = uiState.showResolvedOnly == true,
                 onClick = { viewModel.setResolvedFilter(if (uiState.showResolvedOnly == true) null else true) },
-                label = { Text("Resolved") }
+                label = { Text("Resolved", maxLines = 1) }
             )
         }
 

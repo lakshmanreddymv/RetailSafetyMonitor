@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
@@ -50,10 +49,15 @@ fun ComplianceGauge(
         label = "compliance_score"
     )
 
+    val safeColor = MaterialTheme.colorScheme.tertiary
+    val warningColor = MaterialTheme.colorScheme.secondary
+    val criticalColor = MaterialTheme.colorScheme.primary
+    val trackColor = MaterialTheme.colorScheme.surfaceVariant
+
     val gaugeColor = when {
-        score >= 80 -> Color(0xFF43A047)
-        score >= 60 -> Color(0xFFFB8C00)
-        else -> Color(0xFFE53935)
+        score >= 80 -> safeColor
+        score >= 60 -> warningColor
+        else -> criticalColor
     }
 
     Box(modifier = modifier.size(size), contentAlignment = Alignment.Center) {
@@ -64,7 +68,7 @@ fun ComplianceGauge(
 
             // Background arc
             drawArc(
-                color = Color(0xFFE0E0E0),
+                color = trackColor,
                 startAngle = 135f,
                 sweepAngle = 270f,
                 useCenter = false,

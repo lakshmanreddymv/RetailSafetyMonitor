@@ -19,29 +19,41 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = Primary,
+    onPrimary = OnPrimary,
+    primaryContainer = PrimaryContainer,
+    onPrimaryContainer = OnPrimaryContainer,
     secondary = Secondary,
+    onSecondary = OnSecondary,
+    secondaryContainer = SecondaryContainer,
+    onSecondaryContainer = OnSecondaryContainer,
     tertiary = Tertiary,
+    onTertiary = OnTertiary,
+    tertiaryContainer = TertiaryContainer,
     surface = Surface,
-    background = Background
+    onSurface = OnSurface,
+    surfaceVariant = SurfaceVariant,
+    onSurfaceVariant = OnSurfaceVariant,
+    background = Background,
+    onBackground = OnBackground,
+    outline = Outline
 )
 
 /**
  * Root Material 3 theme for the Retail Safety Monitor app.
  *
- * Uses Android 12+ dynamic color ([dynamicColor] = true by default) when available,
- * falling back to the purple seed palette defined in [Color.kt] for older devices.
+ * Always uses the brand color scheme defined in [Color.kt] (safety red/amber/green).
+ * Dynamic color is disabled by default so the palette is consistent on all devices.
  * Hazard severity colors in overlays and badges are defined independently in
  * [SeverityColors.kt] and are not affected by the theme's color scheme.
  *
  * @param darkTheme True to apply the dark color scheme.
- * @param dynamicColor True to use Android 12+ dynamic color (follows the wallpaper palette).
+ * @param dynamicColor False by default; set to true only for wallpaper-driven theming in tests.
  * @param content The composable content tree to apply the theme to.
  */
 @Composable
 fun RetailSafetyMonitorTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

@@ -45,6 +45,12 @@ android {
         compose = true
         buildConfig = true
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
+    }
 }
 
 kotlin {
@@ -163,6 +169,8 @@ dependencies {
     testImplementation(libs.arch.testing)
     testImplementation(libs.room.testing)
     testImplementation(libs.workmanager.testing)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
 
     // Android Tests
     androidTestImplementation(libs.androidx.junit)

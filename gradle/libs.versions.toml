@@ -46,6 +46,8 @@ espressoCore = "3.6.1"
 mockitoKotlin = "5.4.0"
 turbine = "1.2.0"
 archTesting = "2.2.0"
+robolectric = "4.14.1"
+androidxTestCore = "1.6.1"
 
 [libraries]
 # ── Core ─────────────────────────────────────────────────────────────────────
@@ -116,6 +118,8 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 arch-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "archTesting" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+androidx-test-core = { group = "androidx.test", name = "core-ktx", version.ref = "androidxTestCore" }
 
 [plugins]
 # ── Exact plugin block from MedicalSymptomPreScreener ────────────────────────

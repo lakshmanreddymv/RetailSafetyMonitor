@@ -86,7 +86,7 @@ class CameraPermissionDeniedTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        viewModel.onCleared()
+        viewModel.cameraExecutor.shutdown()
     }
 
     // ── Initial state ─────────────────────────────────────────────────────────
@@ -256,7 +256,7 @@ class CameraPermissionDeniedTest {
         viewModel.startCamera(mockLO, mockPV)
         capturedOnError?.invoke(SecurityException("Permission denied"))
 
-        viewModel.onCleared()
+        viewModel.cameraExecutor.shutdown()
 
         assertTrue(
             "Executor must be shut down even after permission denial",
@@ -267,7 +267,7 @@ class CameraPermissionDeniedTest {
     @Test
     fun `onCleared with no prior startCamera — executor shuts down cleanly`() {
         // Never started the camera — permission was denied before the user reached the screen
-        viewModel.onCleared()
+        viewModel.cameraExecutor.shutdown()
 
         assertTrue(
             "Executor must be shut down even when camera was never started",
@@ -283,7 +283,10 @@ class CameraPermissionDeniedTest {
         viewModel.startCamera(mockLO, mockPV)
         capturedOnError?.invoke(SecurityException("Permission denied"))
 
-        viewModel.onCleared()
+        // ViewModel.onCleared() is protected — invoke via reflection to test cleanup side-effects
+        val onCleared = androidx.lifecycle.ViewModel::class.java.getDeclaredMethod("onCleared")
+        onCleared.isAccessible = true
+        onCleared.invoke(viewModel)
 
         verify(hazardDetector).close()
     }

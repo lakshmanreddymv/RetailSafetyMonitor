@@ -257,5 +257,4 @@ class WorkManagerKillRecoveryTest {
             lastEscalatedAt = lastEscalatedAt
         )
 
-    private fun any(): Long = org.mockito.kotlin.any()
 }

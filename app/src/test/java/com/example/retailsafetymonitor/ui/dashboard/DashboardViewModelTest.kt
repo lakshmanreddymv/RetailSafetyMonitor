@@ -89,6 +89,7 @@ class DashboardViewModelTest {
         createViewModel()
 
         viewModel.uiState.test {
+            skipItems(1) // skip default DashboardUiState before upstream collects
             assertEquals(80, awaitItem().complianceScore)
             cancelAndIgnoreRemainingEvents()
         }
@@ -107,6 +108,7 @@ class DashboardViewModelTest {
         createViewModel()
 
         viewModel.uiState.test {
+            skipItems(1) // skip default DashboardUiState before upstream collects
             val state = awaitItem()
             assertEquals(3, state.totalDetected)
             assertEquals(2, state.totalResolved)
@@ -127,6 +129,7 @@ class DashboardViewModelTest {
         createViewModel()
 
         viewModel.uiState.test {
+            skipItems(1) // skip default DashboardUiState before upstream collects
             assertEquals(HazardType.WET_FLOOR, awaitItem().topHazardType)
             cancelAndIgnoreRemainingEvents()
         }

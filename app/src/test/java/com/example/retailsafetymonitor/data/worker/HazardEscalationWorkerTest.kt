@@ -15,6 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.times
@@ -61,7 +62,7 @@ class HazardEscalationWorkerTest {
 
         assertEquals(Result.success(), result)
         verify(notificationManager, times(1)).sendEscalationNotification(any(), any())
-        verify(hazardRepository, times(1)).updateLastEscalatedAt(hazard.id, any())
+        verify(hazardRepository, times(1)).updateLastEscalatedAt(eq(hazard.id), any())
     }
 
     @Test
@@ -202,8 +203,6 @@ class HazardEscalationWorkerTest {
             lastEscalatedAt = lastEscalatedAt
         )
     }
-
-    private fun any(): Long = org.mockito.kotlin.any()
 
     /**
      * Minimal [WorkerFactory] for testing that injects mocked dependencies

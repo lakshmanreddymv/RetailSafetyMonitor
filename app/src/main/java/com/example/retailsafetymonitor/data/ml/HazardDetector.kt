@@ -84,13 +84,15 @@ class HazardDetector @Inject constructor() {
     // Per-type cooldown — keyed by HazardType, value = last Room-insert epoch millis
     private val lastLoggedAt = ConcurrentHashMap<HazardType, Long>()
 
-    val objectDetector = ObjectDetection.getClient(
-        ObjectDetectorOptions.Builder()
-            .setDetectorMode(ObjectDetectorOptions.STREAM_MODE)
-            .enableMultipleObjects()
-            .enableClassification()
-            .build()
-    )
+    val objectDetector by lazy {
+        ObjectDetection.getClient(
+            ObjectDetectorOptions.Builder()
+                .setDetectorMode(ObjectDetectorOptions.STREAM_MODE)
+                .enableMultipleObjects()
+                .enableClassification()
+                .build()
+        )
+    }
 
     /**
      * Creates an [ImageAnalysis.Analyzer] that feeds frames directly into [objectDetector].

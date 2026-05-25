@@ -9,8 +9,10 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
+import org.robolectric.RobolectricTestRunner
 
 /**
  * Unit tests for [HazardDetector].
@@ -28,6 +30,7 @@ import org.mockito.kotlin.whenever
  * - Detection cooldown (60 seconds per type) prevents Room DB flooding;
  *   tests call [HazardDetector.resetCooldowns] before each case.
  */
+@RunWith(RobolectricTestRunner::class)
 class HazardDetectorTest {
 
     private lateinit var detector: HazardDetector

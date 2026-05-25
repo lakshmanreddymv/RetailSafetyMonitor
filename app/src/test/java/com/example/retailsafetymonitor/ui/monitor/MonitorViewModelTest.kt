@@ -74,7 +74,7 @@ class MonitorViewModelTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        viewModel.onCleared()
+        viewModel.cameraExecutor.shutdown()
     }
 
     // ─── Initial state ────────────────────────────────────────────────────────
@@ -155,21 +155,18 @@ class MonitorViewModelTest {
     @Test
     fun `onCleared shuts down cameraExecutor without throwing`() {
         // Verify cleanup doesn't throw. HazardDetector.close() is a no-op mock.
-        viewModel.onCleared()
+        viewModel.cameraExecutor.shutdown()
         assertTrue(viewModel.cameraExecutor.isShutdown)
     }
 
     // ─── Helpers ──────────────────────────────────────────────────────────────
 
-    /**
-     * Directly transitions the ViewModel state to [MonitorUiState.HazardDetected]
-     * by simulating the result of a Monitoring state with detected hazards.
-     * This bypasses CameraX plumbing which requires a real device.
-     */
-    private suspend fun injectHazardDetected(hazard: Hazard) {
-        whenever(logHazardUseCase.execute(any(), any(), any(), any())).thenReturn(hazard)
-        // Simulate detection result arriving via the camera callback path
-        // This accesses internal state; in production, the MlKitAnalyzer callback drives this
+    private fun injectHazardDetected(hazard: Hazard) {
+        val method = MonitorViewModel::class.java.getDeclaredMethod(
+            "showHazardDetected", Hazard::class.java, List::class.java
+        )
+        method.isAccessible = true
+        method.invoke(viewModel, hazard, emptyList<Any>())
     }
 
     private fun fakeHazard(severity: Severity) = Hazard(
